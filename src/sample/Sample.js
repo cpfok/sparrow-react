@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { Button,Icon } from 'antd-mobile';
-import style from './style.scss';
+import './style.scss';
 
 export default class Sample extends Component {
   render() {
