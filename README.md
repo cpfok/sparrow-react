@@ -1,4 +1,4 @@
-##作者: Landfei
+##作者: Land
 
 ## 使用说明:
 npm start: 运行本地开发环境

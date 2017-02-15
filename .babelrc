@@ -3,8 +3,8 @@
   "plugins": [
     [
       "import", {
-        "libraryName": "antd",
-        "style": true   // or 'css'
+        "libraryName": "antd-mobile",
+        "style": "css"   // or 'css'
       }
     ],
     ["transform-class-properties"]
