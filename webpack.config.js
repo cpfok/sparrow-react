@@ -2,7 +2,7 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-// multiple extract instances
+var glob = require('glob');
 var _ = require('lodash');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
@@ -33,12 +33,29 @@ if (options.env == ENV.stage || options.env == ENV.product) {
 }
 var cssExtractor = new ExtractTextPlugin(configFile.css);
 // 获取指定路径下的入口文件
+function getEntries(globPath, exclude) {
+  var files = glob.sync(path.join(__dirname, globPath)),
+    entries = {};
+  files.forEach(function (filepath) {
+    if (exclude && exclude.test(filepath)) {
+      return;
+    }
+    // 取倒数第二层(view下面的文件夹)做包名
+    var split = filepath.split('/');
+    var name = split[split.length - 2];
+    entries[name + ''] = filepath;
+  });
 
+  return entries;
+}
+
+var entries = getEntries('src/modules/*/index.js', /common/);
 var config = {
-  entry: ['./src/sample/index.js'],
+  entry: entries,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: configFile.outputJs,
+    //publicPath: './dist',
     chunkFilename: "[name].js"
     //libraryTarget: 'umd'
   },
@@ -54,6 +71,11 @@ var config = {
       hash: false,
       template: 'src/template.html'
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: configFile.commonJs
+    }),
+    cssExtractor
   ],
   devServer: {
     hot: true,
@@ -89,7 +111,7 @@ var config = {
     rules: [
       {
         test: /\.(css)$/,
-        loader: "style-loader!css-loader!postcss-loader"
+        use: cssExtractor.extract(["css-loader", "postcss-loader"])//"style-loader!css-loader!postcss-loader"
       },
       {
         test: /\.(scss)$/,
@@ -113,5 +135,28 @@ var config = {
   },
 };
 
+Object.keys(entries).forEach(function (name) {
+  // 每个页面生成一个entry，如果需要HotUpdate，在这里修改entry
+  config.entry[name] = entries[name];
+  let file = entries[name];
+  let filePath = file.split(path.sep);
+  let curdir = __dirname.split(path.sep);
+  curdir.pop();
+  var configFile = path.join(__dirname, 'src', 'modules', name, 'config.json');
+  let perConfig = require(configFile);
+  // 每个页面生成一个html
+  var plugin = new HtmlWebpackPlugin({
+    // 生成出来的html文件名
+    filename: name + '.html',
+    // 每个html的模版，这里多个页面使用同一个模版
+    template: path.join(__dirname, 'src', 'template.html'),
+    // 自动将引用插入html
+    inject: 'body',
+    title: perConfig.html.title,
+    // 每个html引用的js模块，也可以在这里加上vendor等公用模块
+    chunks: ['common', name]
+  });
+  config.plugins.push(plugin);
+})
 
 module.exports = config;

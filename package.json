@@ -4,14 +4,16 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "release": "webpack"
   },
   "author": "Land",
   "license": "MIT",
   "dependencies": {
     "antd-mobile": "^0.9.14",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
@@ -25,7 +27,7 @@
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-3": "^6.22.0",
     "css-loader": "^0.26.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "glob": "^7.1.1",
     "html-webpack-plugin": "^2.28.0",
     "less": "^2.7.2",
