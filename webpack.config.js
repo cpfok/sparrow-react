@@ -6,13 +6,13 @@ var glob = require('glob');
 var _ = require('lodash');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
-
+var del = require('del');
 var configFile = {
   css: '[name].css',
   outputJs: '[name].js',
   commonJs: 'common.js',
 }
-
+del('dist')
 var ENV = {
   development: 'dev',
   product: 'prd',
