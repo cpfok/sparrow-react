@@ -50,6 +50,7 @@ function getEntries(globPath, exclude) {
 }
 
 var entries = getEntries('src/modules/*/index.js', /common/);
+
 var config = {
   entry: entries,
   output: {
