@@ -7,7 +7,7 @@ import {
   IndexRoute,
   Redirect
 } from 'react-router';
-import Routes from './modules/sample';
+import SampleRoute from './modules/sample';
 
 class Main extends React.Component {
   componentWillMount() {
@@ -20,7 +20,7 @@ class Main extends React.Component {
   render() {
     return (
       <Router history={browserHistory}>
-        {Routes}
+        {SampleRoute}
       </Router>
     )
   }

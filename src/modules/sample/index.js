@@ -7,14 +7,16 @@ import {
   IndexRoute,
   Redirect
 } from 'react-router';
-import Routes from './Routes'
+import {Layout1} from '../../components/layout';
+import Sample from './Sample';
 
 class Main extends React.Component {
-
   render() {
     return (
       <Router history={hashHistory}>
-        {Routes}
+        <Route path="/" component={Layout1}>
+          <Route path="/sample" component={Sample}/>
+        </Route>
       </Router>
     )
   }
