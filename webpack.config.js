@@ -1,18 +1,21 @@
 var path = require('path');
+//var HelloWorldPlugin = require('./plugins/FileListPlugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+//var StringReplacePlugin = require("string-replace-webpack-plugin");
+
 var glob = require('glob');
 var _ = require('lodash');
 var autoprefixer = require('autoprefixer');
 var precss = require('precss');
-var del = require('del');
+//var del = require('del');
 var configFile = {
   css: '[name].css',
   outputJs: '[name].js',
   commonJs: 'common.js',
 }
-del('dist')
+//del('dist')
 var ENV = {
   development: 'dev',
   product: 'prd',
@@ -56,7 +59,7 @@ var config = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: configFile.outputJs,
-    //publicPath: './dist',
+    publicPath: '@dummy_domain@',
     chunkFilename: "[name].js"
     //libraryTarget: 'umd'
   },
@@ -66,7 +69,8 @@ var config = {
       "process.env": {
         // This has effect on the react lib size
         "NODE_ENV": JSON.stringify('production')
-      }
+      },
+      "env": options.env
     }),
     new HtmlWebpackPlugin({
       hash: false,
@@ -108,32 +112,10 @@ var config = {
       }
     }
   },
-  module: {
-    rules: [
-      {
-        test: /\.(css)$/,
-        use: cssExtractor.extract(["css-loader", "postcss-loader"])//"style-loader!css-loader!postcss-loader"
-      },
-      {
-        test: /\.(scss)$/,
-        loader: "style-loader!css-loader!postcss-loader!sass-loader"
-      },
-      {
-        test: /\.(less)$/,
-        loader: "style-loader!css-loader!postcss-loader!less-loader"
-      },
-      {
-        //test: path.join(__dirname, 'src'),
-        test: /\.js[x]?$/,
-        exclude: /node_modules/,
-        loader: 'react-hot-loader!babel-loader'
-      },
-    ]
-  },
-  resolve: {
-    modules: ['node_modules', path.join(__dirname, '../node_modules')],
-    extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
-  },
+  //resolve: {
+  //  modules: ['node_modules', path.join(__dirname, '../node_modules')],
+  //  extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.ts', '.tsx', '.js', '.jsx', '.json'],
+  //},
 };
 
 Object.keys(entries).forEach(function (name) {
@@ -159,5 +141,10 @@ Object.keys(entries).forEach(function (name) {
   });
   config.plugins.push(plugin);
 })
-
-module.exports = config;
+//config.plugins.push(new HelloWorldPlugin({options: true}));
+//config.plugins.push(new StringReplacePlugin());
+module.exports = (webpackConfig)=> {
+  config.plugins = webpackConfig.plugins.concat(config.plugins);
+  let retVal = Object.assign({}, webpackConfig, config);
+  return retVal;
+};
