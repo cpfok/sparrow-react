@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 
-export default class Layout extends Component{
+export default class Layout extends Component {
 
   constructor(props) {
     super(props);
-    console.log(ENV)
   }
 
-  render(){
+  render() {
     return (
       <div>
         Layout

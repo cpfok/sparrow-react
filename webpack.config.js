@@ -63,8 +63,8 @@ var config = {
   //  chunkFilename: "[name].js"
   //  //libraryTarget: 'umd'
   //},
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+  //plugins: [
+  //  new webpack.HotModuleReplacementPlugin(),
     //new webpack.DefinePlugin({
     //  "process.env": {
     //    // This has effect on the react lib size
@@ -76,11 +76,10 @@ var config = {
     //  hash: false,
     //  template: 'src/template.html'
     //}),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'common'
-    }),
-    cssExtractor
-  ],
+    //new webpack.optimize.CommonsChunkPlugin({
+    //  name: 'common'
+    //}),
+  //],
   devServer: {
     hot: true,
     inline: true,

@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "rstool-build --server",
-    "dev": "rstool-build --env dev --cdn --hash",
-    "uat1": "rstool-build --env uat1 --cdn --hash",
-    "stg": "rstool-build --env stg --cdn --hash",
-    "prd": "rstool-build --env prd --cdn --hash"
+    "dev": "rm -rf ./dist && rstool-build --env dev --cdn --hash",
+    "uat1": "rm -rf ./dist && rstool-build --env uat1 --cdn --hash",
+    "stg": "rm -rf ./dist && rstool-build --env stg --cdn --hash",
+    "prd": "rm -rf ./dist && rstool-build --env prd --cdn --hash"
   },
   "author": "Land",
   "license": "MIT",
