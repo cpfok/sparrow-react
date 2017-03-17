@@ -22,5 +22,5 @@ var config = {
 module.exports = (webpackConfig)=> {
   //config.plugins = webpackConfig.plugins.concat(config.plugins);
   let retVal = Object.assign({}, webpackConfig, config);
-  return webpackConfig;
+  return retVal;
 };
