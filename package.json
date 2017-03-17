@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "rstool-build --server",
-    "dev": "rstool-build --env dev --cdn",
-    "uat1": "rstool-build --env uat1 --cdn",
-    "stg": "rstool-build --env stg --cdn",
-    "prd": "rstool-build --env prd --cdn"
+    "dev": "rstool-build --env dev --cdn --hash",
+    "uat1": "rstool-build --env uat1 --cdn --hash",
+    "stg": "rstool-build --env stg --cdn --hash",
+    "prd": "rstool-build --env prd --cdn --hash"
   },
   "author": "Land",
   "license": "MIT",
@@ -21,6 +21,6 @@
   "devDependencies": {
     "glob": "^7.1.1",
     "react-hot-loader": "^1.3.1",
-    "rstool-build": "^0.1.10"
+    "rstool-build": "^0.1.11"
   }
 }
