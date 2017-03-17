@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "api": "hotnode app-server",
     "start": "rstool-build --server",
     "dev": "rm -rf ./dist && rstool-build --env dev --cdn --hash",
     "uat1": "rm -rf ./dist && rstool-build --env uat1 --cdn --hash",

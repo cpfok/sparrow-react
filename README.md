@@ -17,7 +17,7 @@ src 源代码
 test 测试代码
 
 ### npm源设置
-npm set registry http://npm.dev.rs.com
+npm set registry http://npm.corp.rs.com:4873/
 
 ### 启动api服务器
 npm run api
