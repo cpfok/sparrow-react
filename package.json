@@ -6,8 +6,8 @@
   "scripts": {
     "api": "hotnode app-server",
     "start": "rstool-build --server",
-    "dev": "rm -rf ./dist && rstool-build --env dev --cdn --hash",
-    "uat1": "rm -rf ./dist && rstool-build --env uat1 --cdn --hash",
+    "dev": "rm -rf ./dist && rstool-build --env dev --cdn --hash --devtool source-map",
+    "uat1": "rm -rf ./dist && rstool-build --env uat1 --cdn --hash --devtool source-map",
     "stg": "rm -rf ./dist && rstool-build --env stg --cdn --hash",
     "prd": "rm -rf ./dist && rstool-build --env prd --cdn --hash"
   },
@@ -22,6 +22,6 @@
   "devDependencies": {
     "glob": "^7.1.1",
     "react-hot-loader": "^1.3.1",
-    "rstool-build": "^0.1.11"
+    "rstool-build": "^0.1.21"
   }
 }
